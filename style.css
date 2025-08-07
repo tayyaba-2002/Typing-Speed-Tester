@@ -140,4 +140,10 @@ button:hover {
   font-weight: bold;
   box-shadow: 0 0 8px #000000;
   transition: background-color 0.3s;
+
+.key: hover {
+  box-shadow: 0 0 10px #fff;
+  transform: scale(1.05);
+}
+
 }
