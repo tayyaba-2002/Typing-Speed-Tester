@@ -1,0 +1,143 @@
+/* General styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at center, #942424 10%, #000000 80%);
+    color: white;
+    display: flex;
+    /* Center horizontally */
+    justify-content: center;
+    /* Center vertically */
+    align-items: center;
+}
+
+.container {
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px 40px 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    user-select: none;
+}
+
+h1 {
+    margin-bottom: 15px;
+}
+
+.paragraph {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    user-select: text;
+    min-height: 110px;
+    text-align: left;
+    background: rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    resize: none;
+    outline: none;
+    font-family: monospace;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    min-height: 120px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #4a00e0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    user-select: none;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+/* Keyboard styles */
+.keyboard {
+  display: block;
+  margin: 20px auto;
+  width: 620px; /* Fixed width to contain the longest row */
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.key-row {
+  display: flex;
+  justify-content: flex-start; /* Changed from center */
+  margin-bottom: 6px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Adjust row-specific spacing for better alignment */
+.key-row:nth-child(1) { padding-left: 0px; }    /* Number row */
+.key-row:nth-child(2) { padding-left: 10px; }   /* QWERTY row */
+.key-row:nth-child(3) { padding-left: 20px; }   /* ASDF row */
+.key-row:nth-child(4) { padding-left: 30px; }   /* ZXCV row */
+.key-row:nth-child(5) { padding-left: 0px; }    /* Space bar row */
+
+.key {
+  border: 1px solid #999;
+  border-radius: 5px;
+  background: #222;
+  color: #eee;
+  padding: 12px 10px;
+  margin: 0 4px;
+  font-size: 14px;
+  text-align: center;
+  width: 40px;
+  cursor: default;
+  user-select: none;
+  transition: background-color 0.2s, color 0.2s;
+  line-height: 1.2;
+  position: relative;
+}
+
+/* wider key styles */
+.key[data-key="Backspace"] { width: 70px; }
+.key[data-key="Tab"],
+.key[data-key="CapsLock"],
+.key[data-key="Enter"],
+.key[data-key="ShiftLeft"],
+.key[data-key="ShiftRight"] { width: 60px; }
+.key[data-key="Space"] { width: 240px; }
+
+/* finger color coding */
+.finger-pinky { background-color: black; }
+.finger-ring { background-color:black; }
+.finger-middle { background-color: black; color: white; }
+.finger-index { background-color: black; }
+.finger-thumb { background-color: black; }
+
+/* pressed key style */
+.key.pressed {
+  background-color: #942424 !important;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 0 8px #000000;
+  transition: background-color 0.1s;
+}
