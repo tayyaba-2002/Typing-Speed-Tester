@@ -125,22 +125,28 @@ document.querySelectorAll('.key').forEach(key => {
     });
 });
 
-// Physical keyboard
-document.addEventListener('keydown', (event) => {
-    const keyElement = document.querySelector(`.key[data-key="${event.code}"]`);
-    if (keyElement && !keyElement.classList.contains('pressed')) {
-        keyElement.classList.add('pressed');
-        clickSound.currentTime = 0;
-        clickSound.play();
-    }
-});
+ // Handle physical keyboard presses
+    const pressedKeys = new Set(); // track keys being held
 
-document.addEventListener('keyup', (event) => {
-    const keyElement = document.querySelector(`.key[data-key="${event.code}"]`);
-    if (keyElement) {
-        keyElement.classList.remove('pressed');
-    }
-});
+    document.addEventListener('keydown', (event) => {
+        if (pressedKeys.has(event.code)) return; // avoid repeats
+        pressedKeys.add(event.code);
+        const keyElement = document.querySelector(`.key[data-key="${event.code}"]`);
+        if (keyElement) {
+            keyElement.classList.add('pressed');
+            clickSound.currentTime = 0;
+            clickSound.play();
+        }
+    });
+
+    document.addEventListener('keyup', (event) => {
+        pressedKeys.delete(event.code);
+        const keyElement = document.querySelector(`.key[data-key="${event.code}"]`);
+        if (keyElement) {
+            keyElement.classList.remove('pressed');
+        }
+    });
+
 </script>
 </body>
 </html>
