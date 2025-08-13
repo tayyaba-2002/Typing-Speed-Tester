@@ -80,17 +80,9 @@ input.addEventListener("input", () => {
 });
 
 window.addEventListener("keydown", (e) => {
-  highlightKey(e.code);
-
-  // Play click sound only for allowed keys
-  if (e.key.length === 1 || e.code === "Space" || e.code === "Backspace" || e.code === "Enter") {
-    clickSound.currentTime = 0;
-    clickSound.play();
-  }
-});
-
-window.addEventListener("keyup", (e) => {
-  removeHighlight(e.code);
+  highlightKey(e.code); // still highlight the pressed key
+  clickSound.currentTime = 0; // rewind to start
+  clickSound.play(); // play the click sound
 });
 
 retryButton.addEventListener("click", () => {
