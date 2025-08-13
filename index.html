@@ -135,8 +135,8 @@ document.querySelectorAll('.key').forEach(key => {
         const keyElement = document.querySelector(`.key[data-key="${event.code}"]`);
         if (keyElement) {
             keyElement.classList.add('pressed');
-            clickSound.currentTime = 0;
-            clickSound.play().catch(e => console.log("Audio play error:", e));
+            document.getElementById('click-sound').currentTime = 0;
+            document.getElementById('click-sound').play();
         }
     });
 
