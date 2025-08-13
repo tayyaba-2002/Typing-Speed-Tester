@@ -143,7 +143,7 @@ button:hover {
 }
 
 /* hover style */
-.key: hover {
+.key:hover {
   box-shadow: 0 0 10px #fff;
   transform: scale(1.05);
 }
