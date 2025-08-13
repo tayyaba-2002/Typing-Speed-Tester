@@ -125,18 +125,18 @@ document.querySelectorAll('.key').forEach(key => {
     });
 });
 
-// For actual keyboard press
+// Physical keyboard
 document.addEventListener('keydown', (event) => {
-    const keyElement = document.querySelector(`.key[data-key="${event.key}"]`);
-    if (keyElement) {
+    const keyElement = document.querySelector(`.key[data-key="${event.code}"]`);
+    if (keyElement && !keyElement.classList.contains('pressed')) {
         keyElement.classList.add('pressed');
-        document.getElementById('click-sound').currentTime = 0;
-        document.getElementById('click-sound').play();
+        clickSound.currentTime = 0;
+        clickSound.play();
     }
 });
 
 document.addEventListener('keyup', (event) => {
-    const keyElement = document.querySelector(`.key[data-key="${event.key}"]`);
+    const keyElement = document.querySelector(`.key[data-key="${event.code}"]`);
     if (keyElement) {
         keyElement.classList.remove('pressed');
     }
