@@ -17,7 +17,7 @@ const timeDisplay = document.getElementById("time");
 const wpmDisplay = document.getElementById("wpm");
 const accuracyDisplay = document.getElementById("accuracy");
 const retryButton = document.getElementById("retry");
-const clickSound = document.getElementById("click-sound");
+const clickSound = document.getElementById("click-sound"); // ✅ use ONE id
 const keys = document.querySelectorAll(".key");
 
 function loadParagraph() {
@@ -52,12 +52,18 @@ function calculateStats() {
   accuracyDisplay.textContent = isFinite(accuracy) ? accuracy : 0;
 }
 
-// Highlight pressed key on visual keyboard
+// Highlight pressed key
 function highlightKey(code) {
-  keys.forEach((key) => key.classList.remove("pressed"));
   const keyDiv = document.querySelector(`.key[data-key="${code}"]`);
   if (keyDiv) {
     keyDiv.classList.add("pressed");
+  }
+}
+
+function removeHighlight(code) {
+  const keyDiv = document.querySelector(`.key[data-key="${code}"]`);
+  if (keyDiv) {
+    keyDiv.classList.remove("pressed");
   }
 }
 
@@ -76,27 +82,15 @@ input.addEventListener("input", () => {
 window.addEventListener("keydown", (e) => {
   highlightKey(e.code);
 
-  // Play click sound but only for character keys and space/backspace etc
-  const allowedKeys = [
-    ...Array.from({ length: 26 }, (_, i) => "Key" + String.fromCharCode(65 + i)), // A-Z
-    ...Array.from({ length: 10 }, (_, i) => "Digit" + i), // 0-9
-    "Space", "Backspace", "Enter", "Tab",
-    "Minus", "Equal", "BracketLeft", "BracketRight", "Backslash",
-    "Semicolon", "Quote", "Comma", "Period", "Slash",
-    "CapsLock", "ShiftLeft", "ShiftRight"
-  ];
-
-  if (allowedKeys.includes(e.code)) {
+  // Play click sound only for allowed keys
+  if (e.key.length === 1 || e.code === "Space" || e.code === "Backspace" || e.code === "Enter") {
     clickSound.currentTime = 0;
     clickSound.play();
   }
 });
 
 window.addEventListener("keyup", (e) => {
-  const keyDiv = document.querySelector(`.key[data-key="${e.code}"]`);
-  if (keyDiv) {
-    keyDiv.classList.remove("pressed");
-  }
+  removeHighlight(e.code);
 });
 
 retryButton.addEventListener("click", () => {
@@ -112,19 +106,3 @@ retryButton.addEventListener("click", () => {
 
 // Initial load
 loadParagraph();
-
-const clickSound = document.getElementById("clickSound");
-
-// Function to play click sound
-function playClickSound() {
-  clickSound.currentTime = 0; // Reset to start
-  clickSound.play();
-}
-
-// Event listener for key presses
-document.addEventListener("keydown", function (e) {
-  // Optional: restrict to only letter keys
-  if (e.key.length === 1) {
-    playClickSound();
-  }
-});
