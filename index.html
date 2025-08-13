@@ -126,16 +126,17 @@ document.querySelectorAll('.key').forEach(key => {
 });
 
  // Handle physical keyboard presses
-    const pressedKeys = new Set(); // track keys being held
+    const pressedKeys = new Set();
 
     document.addEventListener('keydown', (event) => {
-        if (pressedKeys.has(event.code)) return; // avoid repeats
+        if (pressedKeys.has(event.code)) return;
         pressedKeys.add(event.code);
+        
         const keyElement = document.querySelector(`.key[data-key="${event.code}"]`);
         if (keyElement) {
             keyElement.classList.add('pressed');
             clickSound.currentTime = 0;
-            clickSound.play();
+            clickSound.play().catch(e => console.log("Audio play error:", e));
         }
     });
 
@@ -146,7 +147,6 @@ document.querySelectorAll('.key').forEach(key => {
             keyElement.classList.remove('pressed');
         }
     });
-
 </script>
 </body>
 </html>
