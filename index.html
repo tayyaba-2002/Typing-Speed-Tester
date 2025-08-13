@@ -110,7 +110,38 @@
     </div>
   </div>
   <script src="script.js"></script>
+  
  <audio id="click-sound" src="764661__getwecked__mechanical-keyboard-click.wav" preload="auto"></audio>
+<script>
+document.querySelectorAll('.key').forEach(key => {
+    key.addEventListener('mousedown', () => {
+        key.classList.add('pressed');
+        document.getElementById('click-sound').currentTime = 0; // reset sound
+        document.getElementById('click-sound').play();
+    });
+
+    key.addEventListener('mouseup', () => {
+        key.classList.remove('pressed');
+    });
+});
+
+// For actual keyboard press
+document.addEventListener('keydown', (event) => {
+    const keyElement = document.querySelector(`.key[data-key="${event.key}"]`);
+    if (keyElement) {
+        keyElement.classList.add('pressed');
+        document.getElementById('click-sound').currentTime = 0;
+        document.getElementById('click-sound').play();
+    }
+});
+
+document.addEventListener('keyup', (event) => {
+    const keyElement = document.querySelector(`.key[data-key="${event.key}"]`);
+    if (keyElement) {
+        keyElement.classList.remove('pressed');
+    }
+});
+</script>
 </body>
 </html>
 
