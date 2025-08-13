@@ -17,7 +17,6 @@ const timeDisplay = document.getElementById("time");
 const wpmDisplay = document.getElementById("wpm");
 const accuracyDisplay = document.getElementById("accuracy");
 const retryButton = document.getElementById("retry");
-const clickSound = document.getElementById("click-sound"); // ✅ use ONE id
 const keys = document.querySelectorAll(".key");
 
 function loadParagraph() {
@@ -77,12 +76,6 @@ input.addEventListener("input", () => {
     stopTimer();
     calculateStats();
   }
-});
-
-window.addEventListener("keydown", (e) => {
-  highlightKey(e.code); // still highlight the pressed key
-  clickSound.currentTime = 0; // rewind to start
-  clickSound.play(); // play the click sound
 });
 
 retryButton.addEventListener("click", () => {
