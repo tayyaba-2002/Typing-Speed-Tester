@@ -129,6 +129,7 @@ document.querySelectorAll('.key').forEach(key => {
     const pressedKeys = new Set();
 
     document.addEventListener('keydown', (event) => {
+      console.log(event.code);
         if (pressedKeys.has(event.code)) return;
         pressedKeys.add(event.code);
         
