@@ -37,19 +37,26 @@ function stopTimer() {
 }
 
 function calculateStats() {
-  const typed = input.value;
-  const timeMinutes = (Date.now() - startTime) / 1000 / 60;
-  const wordCount = currentParagraph.trim().split(/\s+/).length;
-  const wpm = Math.round(wordCount / timeMinutes);
+  const typed = input.value.trim(); // what user typed
+  const elapsedTime = (Date.now() - startTime) / 1000; // seconds
+  const timeMinutes = elapsedTime / 60;
+
+  // count words actually typed
+  const typedWords = typed.split(/\s+/).filter(word => word.length > 0).length;
+  const wpm = Math.round(typedWords / timeMinutes);
+
+  // accuracy calculation
   let correctChars = 0;
-  for (let i = 0; i < currentParagraph.length; i++) {
+  for (let i = 0; i < typed.length; i++) {
     if (typed[i] === currentParagraph[i]) correctChars++;
   }
-  const accuracy = Math.round((correctChars / currentParagraph.length) * 100);
+  const accuracy = Math.round((correctChars / typed.length) * 100);
 
-  wpmDisplay.textContent = isFinite(wpm) ? wpm : 0;
-  accuracyDisplay.textContent = isFinite(accuracy) ? accuracy : 0;
+  // prevent NaN or Infinity
+  wpmDisplay.textContent = (isFinite(wpm) && wpm >= 0) ? wpm : 0;
+  accuracyDisplay.textContent = (isFinite(accuracy) && accuracy >= 0) ? accuracy : 0;
 }
+
 
 // Highlight pressed key
 function highlightKey(code) {
